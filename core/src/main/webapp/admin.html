@@ -1,0 +1,23 @@
+<table class="users result table table-bordered table-striped"></table>
+
+<script type="text/html" id="user_tmpl">
+<thead>
+<tr>
+  <th>Who</th>
+  <th class="score">Score</th>
+</tr>
+</thead>
+<tbody>
+  {{#users}}
+  <tr>
+    <td class="name">{{name}}</td>
+    <td class="score card {{? score}}chosen{{^?}}notchosen{{/?}}">&nbsp;{{? score == -1}}?{{? score == -2}}Coffee{{^?}}{{score}}{{/?}}</td>
+  </tr>
+  {{/users}}
+</tbody>
+</script>
+<div class="form-actions">
+	<a class="btn btn-primary btn-large showcards"><i class="icon-eye-open"></i> <span class="text">Show cards</span></a>
+	<a class="btn btn-large reset"><i class="icon-refresh"></i> Reset</a>
+	<a class="btn btn-large qrcode"><i class="icon-qrcode"></i> QR Code</a>
+</div>

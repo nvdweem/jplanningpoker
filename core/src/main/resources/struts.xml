@@ -1,0 +1,21 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.custom.i18n.resources" value="i18n" />
+	<constant name="struts.convention.default.parent.package"
+		value="jplanningpoker" />
+
+	<package name="jplanningpoker" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="scrumSession" class="com.vdweem.jplanningpoker.session.SessionInterceptor" />
+			<interceptor-stack name="defaultstack">
+				<interceptor-ref name="basicStack" />
+				<interceptor-ref name="scrumSession" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="defaultstack" />
+		
+	</package>
+</struts>

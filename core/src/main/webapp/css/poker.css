@@ -1,0 +1,45 @@
+body {
+	padding-top: 55px;
+	margin: 0;
+}
+.navbar.navbar-fixed-top .brand {
+	float: right;
+}
+.card {
+	text-align: center;
+	font-weight: bold;
+	padding: 10px 0;
+}
+.result .card {
+	font-size: 2em;
+}
+.result .name {
+	font-size: 1.5em;
+	font-weight: bolder;
+}
+.selectable {
+	padding: 10px 0;
+}
+html body table.result tbody tr td.chosen {
+	background-color: #afa;
+	color: #afa;
+}
+html body table.result tbody tr td.notchosen {
+	background-color: #faa;
+	color: #faa;
+}
+html body table.result tbody tr td.shown {
+	color: black;
+	background-color: inherited;
+}
+.selected {
+	background-color: #eee;
+}
+th.score, td.score {
+	width: 30%;
+}
+html a, html a:hover, html a:visited {
+	font-weight: bold;
+	text-decoration: none;
+	color: #08C;
+}
