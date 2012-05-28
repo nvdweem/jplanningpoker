@@ -1,5 +1,6 @@
 var Scrumpoker = function($) {
 	var cardsShown = false;
+	var lastRequest = false;
 	
 	function init() {
 		$('#yourname').hide();
@@ -48,6 +49,7 @@ var Scrumpoker = function($) {
 		setTimeout(adminLoop, 1000);
 	}
 	function showCards() {
+		if (lastRequest && lastRequest.abort) lastRequest.abort();
 		cardsShown = true;
 		$.getJSON('unsetchoices');
 		$('.card').addClass('shown').removeClass('chosen').removeClass('notchosen');
@@ -65,7 +67,7 @@ var Scrumpoker = function($) {
 	}
 	
 	function showUsers() {
-		$.getJSON('status', {rnd: new Date()}, function(data) {
+		lastRequest = $.getJSON('status', {rnd: new Date()}, function(data) {
 			$('.users').html(kite('#user_tmpl')(data));
 		});
 	}
