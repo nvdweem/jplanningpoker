@@ -26,13 +26,17 @@ public class ChangenameAction {
             return new JSONResult("success");
         }
         if (Util.isEmpty(SessionManager.getSession().getName())) {
-            for (Cookie cookie : ServletActionContext.getRequest().getCookies()) {
-                if ("name".equals(cookie.getName())) {
-                    SessionManager.getSession().setName(cookie.getValue());
-                }
-            }
+            changeNameFromCookie();
         }
         return new JSONResult("name", SessionManager.getSession().getName());
+    }
+
+    public static void changeNameFromCookie() {
+        for (Cookie cookie : ServletActionContext.getRequest().getCookies()) {
+            if ("name".equals(cookie.getName())) {
+                SessionManager.getSession().setName(cookie.getValue());
+            }
+        }
     }
 
     /**

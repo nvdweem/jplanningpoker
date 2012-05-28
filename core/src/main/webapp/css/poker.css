@@ -28,10 +28,17 @@ html body table.result tbody tr td.notchosen {
 	background-color: #faa;
 	color: #faa;
 }
-html body table.result tbody tr td.shown {
+html body table.result.shown tbody tr td {
 	color: black;
 	background-color: inherited;
 }
+.name .icon {
+	visibility: hidden;	
+}
+.shown .name .icon {
+	visibility: visible;	
+}
+
 .selected {
 	background-color: #eee;
 }

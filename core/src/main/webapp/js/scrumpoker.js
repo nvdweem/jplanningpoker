@@ -1,6 +1,7 @@
 var Scrumpoker = function($) {
 	var cardsShown = false;
 	var lastRequest = false;
+	var allSame = false;
 	
 	function init() {
 		$('#yourname').hide();
@@ -12,7 +13,7 @@ var Scrumpoker = function($) {
 	}
 	
 	function initAdmin() {
-		$('#content').load('admin.html?');
+		$('#content').load('admin.html?d');
 		$(document).on('click', '.qrcode', function() {
 			$('<div title="QR Code"> Scan this code with your mobile to join this poker session!<br/><img src="qrcode" style="width: 100%; height: 100%;" /></div>').dialog();
 		})
@@ -52,11 +53,15 @@ var Scrumpoker = function($) {
 		if (lastRequest && lastRequest.abort) lastRequest.abort();
 		cardsShown = true;
 		$.getJSON('unsetchoices');
-		$('.card').addClass('shown').removeClass('chosen').removeClass('notchosen');
+		$('.users.result').addClass('shown').find('.chosen,.notchosen').removeClass('chosen').removeClass('notchosen');
 		$(this).removeClass('showcards').addClass('hidecards').find('span').text('Hide cards').end().find('i').removeClass('icon-eye-open').addClass('icon-eye-close');
+		
+		if (allSame) {
+			// TODO: Do something cool.
+		}
 	}
 	function hideCards() {
-		$('.card').removeClass('shown');
+		$('.users.result').removeClass('shown');
 		$(this).addClass('showcards').removeClass('hidecards').find('span').text('Show cards').end().find('i').addClass('icon-eye-open').removeClass('icon-eye-close');
 		cardsShown = false;
 		adminLoop();
@@ -68,7 +73,9 @@ var Scrumpoker = function($) {
 	
 	function showUsers() {
 		lastRequest = $.getJSON('status', {rnd: new Date()}, function(data) {
+			if ($('#user_tmpl').length == 0) return;
 			$('.users').html(kite('#user_tmpl')(data));
+			allSame = data.result;
 		});
 	}
 	

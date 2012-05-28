@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.struts2.ServletActionContext;
 
 import com.vdweem.jplanningpoker.actions.AdminAction;
+import com.vdweem.jplanningpoker.actions.ChangenameAction;
 
 /**
  * com.vdweem.jplanningpoker.session.SessionManager
@@ -32,8 +33,10 @@ public class SessionManager {
 
             // Create a new session if there isn't a session yet, otherwise put the existing session in the currentSession.
             String id = ServletActionContext.getRequest().getSession().getId();
-            if (sessions.get(id) == null)
+            if (sessions.get(id) == null) {
                 sessions.put(id, new Session());
+                ChangenameAction.changeNameFromCookie();
+            }
             currentSession.set(sessions.get(id));
         }
     }

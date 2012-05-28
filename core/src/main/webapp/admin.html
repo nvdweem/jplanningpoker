@@ -10,7 +10,11 @@
 <tbody>
   {{#users}}
   <tr>
-    <td class="name">{{name}}</td>
+    <td class="name">
+		{{name}}
+		{{? highest }} <i class="icon icon-chevron-up"></i> {{/?}} 
+		{{? lowest }} <i class="icon icon-chevron-down"></i> {{/?}}
+	</td>
     <td class="score card {{? score}}chosen{{^?}}notchosen{{/?}}">&nbsp;{{? score == -1}}?{{? score == -2}}Coffee{{^?}}{{score}}{{/?}}</td>
   </tr>
   {{/users}}
