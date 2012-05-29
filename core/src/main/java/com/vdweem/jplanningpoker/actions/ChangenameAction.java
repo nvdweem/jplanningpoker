@@ -32,6 +32,7 @@ public class ChangenameAction {
     }
 
     public static void changeNameFromCookie() {
+    	if (ServletActionContext.getRequest().getCookies() == null) return;
         for (Cookie cookie : ServletActionContext.getRequest().getCookies()) {
             if ("name".equals(cookie.getName())) {
                 SessionManager.getSession().setName(cookie.getValue());
