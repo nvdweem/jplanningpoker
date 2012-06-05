@@ -22,8 +22,40 @@ var Scrumpoker = function($) {
 		.on('click', '.reset', reset)
 		;
 		
+		addResetOnHideEvent();
 		adminLoop();
 	}
+	
+	// Ripped from http://www.samdutton.com/pageVisibility/js/pageVisibility.js
+	function addResetOnHideEvent() {
+		var hidden = false, visibilityChange = false; 
+		if (typeof document.hidden !== "undefined") {
+			hidden = "hidden";
+			visibilityChange = "visibilitychange";
+		} else if (typeof document.mozHidden !== "undefined") {
+			hidden = "mozHidden";
+			visibilityChange = "mozvisibilitychange";
+		} else if (typeof document.msHidden !== "undefined") {
+			hidden = "msHidden";
+			visibilityChange = "msvisibilitychange";
+		} else if (typeof document.webkitHidden !== "undefined") {
+			hidden = "webkitHidden";
+			visibilityChange = "webkitvisibilitychange";
+		}
+
+		function handleVisibilityChange() {
+			if (document[hidden]) {
+				if (cardsShown) {
+					$('.hidecards').click();
+					$('.reset').click();
+				}
+			}
+		}
+
+		if (visibilityChange && hidden)
+		    document.addEventListener(visibilityChange, handleVisibilityChange, false);
+	}
+
 	function initNormal() {
 		$('#yourname').show();
 		$('#content').load('normal.html');
