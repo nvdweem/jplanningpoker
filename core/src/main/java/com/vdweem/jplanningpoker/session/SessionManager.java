@@ -66,6 +66,7 @@ public class SessionManager {
      */
     public static Session getSession() {
         init();
+        if (currentSession.get() == null) return new Session();
         return currentSession.get().touch();
     }
 
